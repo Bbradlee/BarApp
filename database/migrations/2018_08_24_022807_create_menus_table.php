@@ -17,6 +17,7 @@ class CreateMenusTable extends Migration
             $table->increments('id');
             $table->string('cost');
             $table->string('drinkName');
+            $table->longText('description');
             $table->timestamps();
         });
     }

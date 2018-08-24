@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Menu;
 
 class MenuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        //$this->middleware('auth', ['except' => ['index','show']])
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +19,8 @@ class MenuController extends Controller
      */
     public function index()
     {
-        //
+        $menus = Menu::orderBy('created_at', 'des')->paginate(10);
+        return view('menus.index')->with('menus', $menus);
     }
 
     /**
@@ -23,7 +30,7 @@ class MenuController extends Controller
      */
     public function create()
     {
-        //
+        return view('menus.create');
     }
 
     /**
@@ -34,7 +41,18 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'cost' => 'required',
+            'drinkName' => 'required',
+            'description' => 'required',
+        ]);
+        $menu = new Menu;
+        $menu->cost = $request->input('cost');
+        $menu->drinkName = $request->input('drinkName');
+        $menu->description = $request->input('description');
+        $menu->user_id = auth()->user()->id;
+        $menu->save();
+        return redirect('/menus')->with('success', 'Drink Added!');
     }
 
     /**
@@ -45,7 +63,8 @@ class MenuController extends Controller
      */
     public function show($id)
     {
-        //
+        $menu = Menu::find($id);
+        return view('menus.show')->with('menu', $menu);
     }
 
     /**
@@ -56,7 +75,11 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $menu = Menu::find($id);
+        if(auth()->user()->id !== $menu->user_id) {
+            return redirect('menus')->with('error', 'Unauthorized page');
+        }
+        return view('menus.edit')->with('menu', $menu);
     }
 
     /**
@@ -68,7 +91,17 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'cost' => 'required',
+            'drinkName' => 'required',
+            'description' => 'required',
+        ]);
+        $menu = Menu::find($id);
+        $menu->cost = $request->input('cost');
+        $menu->drinkName = $request->input('drinkName');
+        $menu->description = $request->input('description');
+        $menu->save();
+        return redirect('/menus')->with('success', 'Drink Updated!');
     }
 
     /**
@@ -79,6 +112,11 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $menu = Menu::find($id);
+        if(auth()->user()->id !== $menu->user_id) {
+            return redirect('menus')->with('error', 'Unauthorized page');
+        }
+        $menu->delete();
+        return redirect('/menus')->with('success', 'Drink Deleted!');
     }
 }

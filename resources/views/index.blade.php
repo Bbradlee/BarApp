@@ -18,7 +18,7 @@
                     
                     <div style="text-align: center;">
                         <h4>For Patrons</h4>
-                        <p><a class="btn btn-primary btn-lg" href="/volunteers" role="button">View Menu</a></p>
+                        <p><a class="btn btn-primary btn-lg" href="/menus" role="button">View Menu</a></p>
                     </div>
                     <div style="text-align: center;">
                         <h4>For Employees</h4>
