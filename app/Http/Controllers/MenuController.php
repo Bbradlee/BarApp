@@ -50,7 +50,6 @@ class MenuController extends Controller
         $menu->cost = $request->input('cost');
         $menu->drinkName = $request->input('drinkName');
         $menu->description = $request->input('description');
-        $menu->user_id = auth()->user()->id;
         $menu->save();
         return redirect('/menus')->with('success', 'Drink Added!');
     }
@@ -76,9 +75,6 @@ class MenuController extends Controller
     public function edit($id)
     {
         $menu = Menu::find($id);
-        if(auth()->user()->id !== $menu->user_id) {
-            return redirect('menus')->with('error', 'Unauthorized page');
-        }
         return view('menus.edit')->with('menu', $menu);
     }
 
@@ -113,9 +109,6 @@ class MenuController extends Controller
     public function destroy($id)
     {
         $menu = Menu::find($id);
-        if(auth()->user()->id !== $menu->user_id) {
-            return redirect('menus')->with('error', 'Unauthorized page');
-        }
         $menu->delete();
         return redirect('/menus')->with('success', 'Drink Deleted!');
     }
