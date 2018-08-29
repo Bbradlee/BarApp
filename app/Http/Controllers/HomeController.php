@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Menu;
 
 class HomeController extends Controller
 {
@@ -29,6 +30,7 @@ class HomeController extends Controller
 
     public function home()
     {
-        return view('home');
+        $menus = Menu::orderBy('created_at', 'des')->paginate(10);
+        return view('home')->with('menus', $menus);
     }
 }

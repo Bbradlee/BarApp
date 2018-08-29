@@ -19,12 +19,9 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('volunteers.index') }}">
-                        {{ __('Volunteer Index') }}
+                    <a class="dropdown-item" href="{{ route('menus.index') }}">
+                        {{ __('Menu Index') }}
                     </a>
-                    <a class="dropdown-item" href="{{ route('opportunities.index') }}">
-                      {{ __('Opportunity Index') }}
-                  </a>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                       document.getElementById('logout-form').submit();">

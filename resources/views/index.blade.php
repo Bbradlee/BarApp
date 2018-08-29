@@ -18,11 +18,11 @@
                     
                     <div style="text-align: center;">
                         <h4>For Patrons</h4>
-                        <p><a class="btn btn-primary btn-lg" href="/menus" role="button">View Menu</a></p>
+                        <p><a class="btn btn-primary btn-lg" href="/home" role="button">View Menu</a></p>
                     </div>
                     <div style="text-align: center;">
                         <h4>For Employees</h4>
-                        <p><a class="btn btn-primary btn-lg" href="/opportunities" role="button">View Open Orders</a></p>
+                        <p><a class="btn btn-primary btn-lg" href="/menus" role="button">View Open Orders</a></p>
                     </div>
                     <br />
                 </div>

@@ -18,4 +18,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@home')->name('home');
 
 Route::resource('menus', 'MenuController');
+Route::resource('orders', 'OrdersController');
 Auth::routes();
