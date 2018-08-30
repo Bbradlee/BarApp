@@ -1,37 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>menu Index</h1>
-    <div style="padding-bottom: 1em">Here you can view and edit menus</div> 
+    <h1>Open Orders</h1>
+    <div style="padding-bottom: 1em">Here you can view open orders and mark them completed.</div> 
     <br>
-    <div class="text-right"><a href="/menus/create" class="btn btn-md btn-primary">Add New</a></div>
+    <div class="text-right"><a href="/menus/create" class="btn btn-md btn-primary">Add New Drink</a></div>
     <hr>
-    @if(count($menus) > 0)
+    @if(count($orders) > 0)
         <div class="row">
             <div class="col-3 col-lg-3">Drink</div>
             <div class="col-2 col-lg-2">Price</div>
             <div class="col-2 col-lg-2">Description</div>
         </div>
         <br />
-        @foreach($menus as $menu)
+        @foreach($orders as $order)
             <div class="row">
-                <div class="col-3 col-lg-3">{{$menu->drinkName}}</div>
-                <div class="col-2 col-lg-2">{{$menu->cost}}</div>
-                <div class="col-2 col-lg-2">{{$menu->description}}</div>
+                <div class="col-3 col-lg-3">{{$order->drinkName}}</div>
+                <div class="col-2 col-lg-2">{{$order->cost}}</div>
+                <div class="col-2 col-lg-2">{{$order->description}}</div>
                 <div class="col-3 col-lg-3">
                     <div class="btn-group">
-                        <a class="btn btn-secondary" href="/menus/{{$menu->id}}" role="button">View</a>
-                        <a class="btn btn-primary active" href="/menus/{{$menu->id}}/edit" role="button">Edit</a>
-                        {!!Form::open(['action' => ['MenuController@destroy', $menu->id], 'method' => 'POST', 'class' => 'btn btn-sm btn-danger'])!!}
+                        <a class="btn btn-secondary" href="/menus/{{$order->id}}" role="button">View</a>
+                        <a class="btn btn-primary active" href="/menus/{{$order->id}}/edit" role="button">Edit</a>
+                        {!!Form::open(['action' => ['MenuController@destroy', $order->id], 'method' => 'POST', 'class' => 'btn btn-sm btn-danger'])!!}
                             {{Form::hidden('_method', 'DELETE')}}
-                            {{Form::submit('Delete', ['class' => 'btn btn-sm btn-danger'])}}
+                            {{Form::submit('Completed', ['class' => 'btn btn-sm btn-danger'])}}
                         {!!Form::close()!!}
                     </div>
                 </div>
             </div>
             <div class="row">&nbsp;</div>
         @endforeach
-    {{$menus->links()}}
+    {{$orders->links()}}
     @else
         <p>No Drinks Found</p>
     @endif

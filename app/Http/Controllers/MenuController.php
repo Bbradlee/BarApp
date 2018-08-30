@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Menu;
+use App\Order;
 
 class MenuController extends Controller
 {
@@ -19,8 +20,8 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menus = Menu::orderBy('created_at', 'des')->paginate(10);
-        return view('menus.index')->with('menus', $menus);
+        $orders = Order::orderBy('created_at', 'asc')->paginate(10);
+        return view('menus.index')->with('orders', $orders);
     }
 
     /**
@@ -108,8 +109,8 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        $menu = Menu::find($id);
-        $menu->delete();
-        return redirect('/menus')->with('success', 'Drink Deleted!');
+        $order = Order::find($id);
+        $order->delete();
+        return redirect('/menus')->with('success', 'Order Completed!');
     }
 }

@@ -20,7 +20,9 @@ class OrdersController extends Controller
     public function index()
     {
         $orders = Order::orderBy('created_at', 'des')->paginate(10);
-        return view('orders.index')->with('orders', $orders);
+        return view('menus.index')->with('orders', $orders);
+        $menus = Menu::orderBy('created_at', 'des')->paginate(10);
+        return view('menus.index')->with('menus', $menus);
     }
 
     /**
@@ -51,6 +53,7 @@ class OrdersController extends Controller
         $order->drinkName = $request->input('drinkName');
         $order->description = $request->input('description');
         $order->save();
+        return redirect('/home')->with('message', 'Drink Ordered!');
     }
 
     /**

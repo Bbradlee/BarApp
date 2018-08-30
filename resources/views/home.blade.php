@@ -2,34 +2,27 @@
 
 @section('content')
     <h1>Menu</h1>
-    <div style="padding-bottom: 1em">Here you can view and edit menus</div> 
+    <div style="padding-bottom: 1em">Here you order drinks! Click view for more info.</div> 
     <br>
     <hr>
     @if(count($menus) > 0)
         <div class="row">
             <div class="col-3 col-lg-3">Drink</div>
             <div class="col-2 col-lg-2">Price</div>
-            <div class="col-2 col-lg-2">Description</div>
         </div>
         <br />
         @foreach($menus as $menu)
             <div class="row">
                 <div class="col-3 col-lg-3">{{$menu->drinkName}}</div>
                 <div class="col-2 col-lg-2">{{$menu->cost}}</div>
-                <div class="col-2 col-lg-2">{{$menu->description}}</div>
                 <div class="col-3 col-lg-3">
                     <div class="btn-group">
                         <a class="btn btn-secondary" href="/menus/{{$menu->id}}" role="button">View</a>
-                        <a class="btn btn-primary active" href="/menus/{{$menu->id}}/edit" role="button">Order</a>
-                        {!! Form::open(['action' => 'OrdersController@store', 'method' => 'POST']) !!}
+                        {!! Form::open(['action' => 'OrdersController@store', 'method' => 'POST', 'class' => 'btn btn-sm btn-primary']) !!}
                             {{Form::hidden('drinkName',$menu->drinkName)}}
                             {{Form::hidden('cost',$menu->cost)}}
                             {{Form::hidden('description',$menu->description)}}
-                            {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}                        
-                        {!!Form::close()!!}
-                        {!!Form::open(['action' => ['MenuController@destroy', $menu->id], 'method' => 'POST', 'class' => 'btn btn-sm btn-danger'])!!}
-                            {{Form::hidden('_method', 'DELETE')}}
-                            {{Form::submit('Delete', ['class' => 'btn btn-sm btn-danger'])}}
+                            {{Form::submit('Order', ['class' => 'btn btn-sm btn-primary'])}}                        
                         {!!Form::close()!!}
                     </div>
                 </div>
