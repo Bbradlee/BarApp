@@ -21,8 +21,6 @@ class OrdersController extends Controller
     {
         $orders = Order::orderBy('created_at', 'des')->paginate(10);
         return view('menus.index')->with('orders', $orders);
-        $menus = Menu::orderBy('created_at', 'des')->paginate(10);
-        return view('menus.index')->with('menus', $menus);
     }
 
     /**

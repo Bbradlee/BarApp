@@ -21,7 +21,6 @@
                 <div class="col-3 col-lg-3">
                     <div class="btn-group">
                         <a class="btn btn-secondary" href="/menus/{{$order->id}}" role="button">View</a>
-                        <a class="btn btn-primary active" href="/menus/{{$order->id}}/edit" role="button">Edit</a>
                         {!!Form::open(['action' => ['MenuController@destroy', $order->id], 'method' => 'POST', 'class' => 'btn btn-sm btn-danger'])!!}
                             {{Form::hidden('_method', 'DELETE')}}
                             {{Form::submit('Completed', ['class' => 'btn btn-sm btn-danger'])}}
@@ -33,7 +32,7 @@
         @endforeach
     {{$orders->links()}}
     @else
-        <p>No Drinks Found</p>
+        <p>No Open Orders</p>
     @endif
     </hr>
 
